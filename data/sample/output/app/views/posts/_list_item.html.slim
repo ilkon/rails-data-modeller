@@ -1,0 +1,26 @@
+tr
+  td
+    a href=post_path(resource)
+      = resource.publisher.try(:name)
+  td
+    = resource.publisher_key
+  td
+    = resource.published_at
+  td
+    = resource.author
+  td
+    = resource.text
+  td
+    = resource.vacancy
+  td
+    = resource.last_fetched_at
+  td
+    = resource.last_parsed_at
+  td
+    = resource.date
+  td
+    a href=edit_post_path(resource)
+      i class='fas fa-edit'
+  td
+    a href=post_path(resource) rel='nofollow' data-method='delete' data-confirm='Are you sure?'
+      i class='fas fa-trash-alt'

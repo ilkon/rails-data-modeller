@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    meta http-equiv='Content-Type' content='text/html; charset=UTF-8'
+    meta name='viewport' content='width=device-width, initial-scale=1'
+    title= (content_for?(:page_title) ? yield(:page_title) + ' | ' : '') + 'Project'
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_pack_tag 'stylesheets', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body.application
+    = render 'layouts/navbar'
+    .container
+      - if controller_path.start_with?('devise')
+        .row.justify-content-md-center.mt-5
+          .col.col-md-6
+            = render 'layouts/alert'
+            = yield
+      - else
+        .row.mt-5
+          .col
+            = render 'layouts/alert'
+            = yield

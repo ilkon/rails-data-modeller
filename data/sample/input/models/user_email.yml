@@ -1,0 +1,25 @@
+attributes:
+  user:
+    type: reference
+    presence: true
+    foreign_key:
+      on_delete: cascade
+  email:
+    type: email
+    presence: true
+    uniqueness: true
+  confirm_token:
+    type: string
+    uniqueness: true
+  confirm_sent_at:
+    type: datetime
+  confirmed_at:
+    type: datetime
+
+associations:
+  user:
+    type: belongs_to
+    inverse_of: user_emails
+
+properties:
+  timestamps: true

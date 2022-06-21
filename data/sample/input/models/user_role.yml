@@ -1,0 +1,22 @@
+attributes:
+  user:
+    type: reference
+    presence: true
+    uniqueness: true
+    foreign_key:
+      on_delete: cascade
+  admin:
+    type: boolean
+    default: false
+
+associations:
+  user:
+    type: belongs_to
+    inverse_of: user_role
+
+properties:
+  timestamps: true
+
+scopes:
+  admins:
+    admin: true

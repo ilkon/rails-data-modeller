@@ -1,0 +1,45 @@
+attributes:
+  publisher:
+    type: reference
+    presence: true
+    index: false
+  post:
+    type: reference
+    presence: true
+    index: false
+  published_at:
+    type: datetime
+    presence: true
+  employer:
+    type: reference
+    index: false
+  remoteness:
+    type: integer
+  involvement:
+    type: integer
+  skill_ids:
+    type: jsonb
+    default: '[]'
+  geo:
+    type: geolocation
+  urls:
+    type: jsonb
+    default: '[]'
+  emails:
+    type: jsonb
+    default: '[]'
+  text:
+    type: text
+    presence: true
+  date:
+    type: date
+    presence: true
+
+constants:
+  REMOTENESS: '%i[remote onsite]'
+  INVOLVEMENT: '%i[fulltime parttime]'
+
+properties:
+  timestamps: true
+  id: bigserial
+  partitionable: true

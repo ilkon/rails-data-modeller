@@ -1,0 +1,45 @@
+attributes:
+  name:
+    type: string
+    presence: true
+    strip: true
+    length:
+      min: 3
+      max: 120
+    allow_blank: true
+  status:
+    type: enum
+    values: [active, blocked]
+    default: active
+
+associations:
+  user_email:
+    type: has_many
+    inverse_of: user
+    dependent: destroy
+  user_password:
+    type: has_one
+    inverse_of: user
+    dependent: destroy
+  user_social_profile:
+    type: has_many
+    inverse_of: user
+    dependent: destroy
+  user_role:
+    type: has_one
+    inverse_of: user
+    dependent: destroy
+  user_wallet:
+    type: has_one
+    inverse_of: user
+    dependent: destroy
+  user_address:
+    type: has_one
+    inverse_of: user
+    dependent: destroy
+  logo:
+    type: has_one_attached
+    dependent: purge_later
+
+properties:
+  timestamps: true

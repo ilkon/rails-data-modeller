@@ -1,0 +1,48 @@
+= form_for resource do |f|
+  - if resource.errors.any?
+    .alert.alert-danger role='alert'
+      h4= "#{pluralize(resource.errors.count, "error")} prohibited this post from being saved:"
+      ul
+        - resource.errors.full_messages.each do |message|
+          li= message
+
+  .form-group.row
+    = f.label :publisher, class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.collection_select :publisher_id, Publisher.all, :id, :name, { include_blank: true }, class: 'form-control'
+  .form-group.row
+    = f.label :publisher_key, class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.text_field :publisher_key, autocomplete: 'off', class: 'form-control'
+  .form-group.row
+    = f.label :published_at, class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.text_field :published_at, autocomplete: 'off', class: 'form-control'
+  .form-group.row
+    = f.label :author, class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.text_field :author, autocomplete: 'off', class: 'form-control'
+  .form-group.row
+    = f.label :text, class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.text_area :text, rows: 5, class: 'form-control'
+  .form-group.row
+    = f.label :vacancy, class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.text_field :vacancy, autocomplete: 'off', class: 'form-control'
+  .form-group.row
+    = f.label :last_fetched_at, class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.text_field :last_fetched_at, autocomplete: 'off', class: 'form-control'
+  .form-group.row
+    = f.label :last_parsed_at, class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.text_field :last_parsed_at, autocomplete: 'off', class: 'form-control'
+  .form-group.row
+    = f.label :date, class: 'col-sm-2 col-form-label'
+    .col-sm-3
+      = f.text_field :date, autocomplete: 'off', class: 'form-control datepicker'
+  .form-group.row
+    .col-sm-10.offset-sm-2
+      = f.submit 'Save', class: 'btn btn-primary'
+      a.btn.btn-link href=posts_path role='button' Cancel

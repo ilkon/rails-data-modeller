@@ -1,0 +1,23 @@
+attributes:
+  user:
+    type: reference
+    presence: true
+    uniqueness: true
+    foreign_key:
+      on_delete: cascade
+  currency:
+    type: string
+    presence: true
+    index: true
+  money:
+    type: money
+    presence: true
+    default: 0.0
+
+associations:
+  user:
+    type: belongs_to
+    inverse_of: user_wallet
+
+properties:
+  timestamps: true

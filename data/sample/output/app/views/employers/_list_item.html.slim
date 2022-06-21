@@ -1,0 +1,12 @@
+tr
+  td
+    a href=employer_path(resource)
+      = resource.name
+  td
+    = resource.url
+  td
+    a href=edit_employer_path(resource)
+      i class='fas fa-edit'
+  td
+    a href=employer_path(resource) rel='nofollow' data-method='delete' data-confirm='Are you sure?'
+      i class='fas fa-trash-alt'

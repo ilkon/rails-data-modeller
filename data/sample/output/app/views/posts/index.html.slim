@@ -1,0 +1,23 @@
+h1 Posts
+
+table class='table'
+  thead
+    tr
+      th scope='col' Publisher
+      th scope='col' Publisher key
+      th scope='col' Published at
+      th scope='col' Author
+      th scope='col' Text
+      th scope='col' Vacancy
+      th scope='col' Last fetched at
+      th scope='col' Last parsed at
+      th scope='col' Date
+      th scope='col'
+      th scope='col'
+
+  tbody
+    = render partial: 'list_item', collection: @posts, as: :resource
+
+br
+
+= link_to 'New Post', new_post_path

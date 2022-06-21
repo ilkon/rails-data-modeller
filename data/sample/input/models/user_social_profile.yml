@@ -1,0 +1,34 @@
+attributes:
+  user:
+    type: reference
+    presence: true
+    foreign_key:
+      on_delete: cascade
+  provider_id:
+    type: integer
+    presence: true
+    inclusion:
+      in: PROVIDERS.values
+  uid:
+    type: string
+    presence: true
+    uniqueness:
+      scope: provider_id
+    strip: true
+
+constants:
+  PROVIDERS: '{ github: 1, google: 2 }'
+
+associations:
+  user:
+    type: belongs_to
+    inverse_of: user_social_profiles
+
+properties:
+  timestamps: true
+
+scopes:
+  github:
+    provider_id: PROVIDERS[:github]
+  google:
+    provider_id: PROVIDERS[:google]

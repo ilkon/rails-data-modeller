@@ -1,0 +1,22 @@
+attributes:
+  name:
+    type: string
+    presence: true
+    uniqueness: true
+    strip: true
+    length:
+      min: 2
+      max: 250
+  url:
+    type: url
+
+associations:
+  vacancy:
+    type: has_many
+    dependent: destroy
+    counter_cache: true
+  publisher:
+    type: has_and_belongs_to_many
+
+properties:
+  timestamps: true

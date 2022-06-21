@@ -1,0 +1,35 @@
+attributes:
+  publisher:
+    type: reference
+    id: uuid
+    presence: true
+    index: false
+    shown_by: name
+  publisher_key:
+    type: string
+    presence: true
+    uniqueness:
+      scope: publisher_id
+  published_at:
+    type: datetime
+    presence: true
+  author:
+    type: string
+  text:
+    type: text
+  vacancy:
+    type: boolean
+    default: false
+  last_fetched_at:
+    type: datetime
+    presence: true
+  last_parsed_at:
+    type: datetime
+  date:
+    type: date
+    presence: true
+
+properties:
+  timestamps: true
+  id: bigserial
+  partitionable: true

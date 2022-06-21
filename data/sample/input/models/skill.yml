@@ -1,0 +1,15 @@
+attributes:
+  name:
+    type: string
+    presence: true
+    uniqueness: true
+    strip: true
+    length:
+      min: 1
+      max: 250
+  synonyms:
+    type: jsonb
+    default: '[]'
+
+properties:
+  timestamps: true

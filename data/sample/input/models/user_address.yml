@@ -1,0 +1,38 @@
+attributes:
+  user:
+    type: reference
+    presence: true
+    uniqueness: true
+    foreign_key:
+      on_delete: cascade
+  address_line:
+    type: string
+    presence: true
+    strip: true
+  address_line2:
+    type: string
+    strip: true
+  city:
+    type: string
+    presence: true
+    strip: true
+  postal_code:
+    type: string
+    presence: true
+    strip: true
+  country:
+    type: string
+    presence: true
+    strip: true
+  phone:
+    type: phone
+    presence: true
+    index: true
+
+associations:
+  user:
+    type: belongs_to
+    inverse_of: user_address
+
+properties:
+  timestamps: true
