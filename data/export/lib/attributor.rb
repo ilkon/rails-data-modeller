@@ -1,15 +1,34 @@
 # frozen_string_literal: true
 
+require 'uri/mailto'
+
 module Attributor
   class << self
     WRITER_METHODS = %i[
+      pepper
+      stretches
       password_length
       phone_length
+      access_token_ttl
+      refresh_token_ttl
+      invite_token_ttl
+      invite_token_length
+      reset_password_token_ttl
+      reset_password_token_length
     ].freeze
     attr_writer(*WRITER_METHODS)
 
+    READER_METHODS = %i[
+      pepper
+    ].freeze
+    attr_reader(*READER_METHODS)
+
     def configure
       yield self if block_given?
+    end
+
+    def stretches
+      @stretches || 11
     end
 
     def password_regexp
@@ -23,15 +42,16 @@ module Attributor
     end
 
     def password_length
-      @password_length || (8..64)
+      @password_length || (8..128)
     end
 
     def email_regexp
-      /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+      # /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+      URI::MailTo::EMAIL_REGEXP
     end
 
     def phone_regexp
-      /[\d\s+\-#*@&.,()]+/
+      /\A[\d\s+\-#*@&.,()]+\z/
     end
 
     def phone_length
@@ -65,6 +85,30 @@ module Attributor
         (?:/\S*)?                                                     # resource path
         \z
       }xi
+    end
+
+    def access_token_ttl
+      @access_token_ttl || 30.minutes
+    end
+
+    def refresh_token_ttl
+      @refresh_token_ttl || 1.week
+    end
+
+    def invite_token_ttl
+      @invite_token_ttl || 24.hours
+    end
+
+    def invite_token_length
+      @invite_token_length || 48
+    end
+
+    def reset_password_token_ttl
+      @reset_password_token_ttl || 60.minutes
+    end
+
+    def reset_password_token_length
+      @reset_password_token_length || 48
     end
   end
 end

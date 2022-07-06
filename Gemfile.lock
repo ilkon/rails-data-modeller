@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails-data-modeller (20220621.160530.641)
+    rails-data-modeller (20220706.165831.713)
       activesupport
 
 GEM
