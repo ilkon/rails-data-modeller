@@ -5,10 +5,10 @@ class Employer < ApplicationRecord
   has_and_belongs_to_many :publishers
 
   validates :name, presence: true, uniqueness: true, length: { in: 2..250 }
-  validates :url, format: { with: Attributor.url_regexp, allow_blank: true }
+  validates :url, format: { with: Authonomy.url_regexp, allow_blank: true }
 
   strip_attributes :name, :url
 
-  scope :with_vacancies, -> { includes(:vacancies).references(:vacancies) }
-  scope :with_publishers, -> { includes(:publishers).references(:publishers) }
+  scope :with_vacancies, -> { includes(:vacancies) }
+  scope :with_publishers, -> { includes(:publishers) }
 end

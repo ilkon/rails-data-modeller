@@ -3,11 +3,11 @@
 class UserWallet < ApplicationRecord
   belongs_to :user, inverse_of: :user_wallet
 
-  validates :user, presence: true, uniqueness: true
+  validates :user, uniqueness: true
   validates :currency, presence: true
-  validates :money, presence: true, format: { with: Attributor.money_regexp, allow_blank: true }
+  validates :money, presence: true, format: { with: Authonomy.money_regexp, allow_blank: true }
 
-  scope :with_user, -> { includes(:user).references(:users) }
+  scope :with_user, -> { includes(:user) }
 
   def money
     @money ||= money_cents && money_cents / 100.0

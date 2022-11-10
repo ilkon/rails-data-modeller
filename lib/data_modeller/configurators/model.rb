@@ -35,9 +35,9 @@ module DataModeller
                 type:                 'string',
                 column_name:          "encrypted_#{attribute}",
                 strip:                true,
-                length:               { in: 'Attributor.password_length' },
+                length:               { in: 'Authonomy.password_length' },
                 format:               {
-                  with:    'Attributor.password_regexp',
+                  with:    'Authonomy.password_regexp',
                   message: 'should include a digit, uppercase and lowercase letter'
                 },
                 unless:               'proc { |a| a.password.nil? }',
@@ -53,7 +53,7 @@ module DataModeller
                 strip:         true,
                 downcase:      true,
                 format:        {
-                  with: 'Attributor.email_regexp'
+                  with: 'Authonomy.email_regexp'
                 }
               )
 
@@ -62,9 +62,9 @@ module DataModeller
                 original_type: props[:type],
                 type:          'string',
                 strip:         true,
-                length:        { in: 'Attributor.phone_length' },
+                length:        { in: 'Authonomy.phone_length' },
                 format:        {
-                  with: 'Attributor.phone_regexp'
+                  with: 'Authonomy.phone_regexp'
                 }
               )
 
@@ -75,7 +75,7 @@ module DataModeller
                 column_name:      "#{attribute}_cents",
                 column_converter: 'money',
                 format:           {
-                  with:        'Attributor.money_regexp',
+                  with:        'Authonomy.money_regexp',
                   allow_blank: true
                 }
               )
@@ -108,18 +108,18 @@ module DataModeller
                 type:          'string',
                 strip:         true,
                 format:        {
-                  with:        'Attributor.url_regexp',
+                  with:        'Authonomy.url_regexp',
                   allow_blank: true
                 }
               )
 
             when 'enum'
-              values = props[:values].each_with_index.each_with_object({}) { |(v, i), hash| hash[v] = i }
+              values = props[:values].each_with_index.with_object({}) { |(v, i), hash| hash[v] = i }
 
               config[:attributes][attribute].merge!(
                 original_type: props[:type],
                 type:          'integer',
-                values:        values
+                values:
               )
 
               config[:attributes][attribute][:default] = values[props[:default]] if props[:default].present?
@@ -197,9 +197,7 @@ module DataModeller
           config[:scopes].each do |_scope, props|
             keys = props.keys.sort
             index_name = "\"\#{table_name}_#{keys.join('_')}\"".to_sym
-            config[:indexes][index_name] = {
-              keys: keys
-            }
+            config[:indexes][index_name] = { keys: }
           end
         end
 

@@ -34,12 +34,6 @@ The task parameters are:
 * `source_path` -- path to a folder with config-files. When omitted, default value is used: _./data/sample/input_.
 * `dest_path` -- path to a folder with a new Rails application where generated files will be written to. Default value: _./tmp_.
 
-The generated files may require some extra config-files or concerns that should be present in the target application. To copy them simply run the task:
- 
-```rake data_modeller:export[dest_path]```
-
-The task parameter `dest_path` has the same meaning as for previous task.
-
 ## Standalone application
 
 The project can be used as a standalone application. Just fetch it by `git clone` command and run `bundle install` to make sure all required libraries for the project are installed.

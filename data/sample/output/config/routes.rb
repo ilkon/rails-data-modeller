@@ -2,9 +2,9 @@
 
 Rails.application.routes.draw do
   # Data Modeller: begin
-  resources :users
-  root to: 'users#index'
   resources :employers
+  root to: 'employers#index'
   resources :posts
+  resources :users
   # Data Modeller: end
 end

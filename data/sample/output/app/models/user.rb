@@ -16,10 +16,10 @@ class User < ApplicationRecord
 
   strip_attributes :name
 
-  scope :with_user_emails, -> { includes(:user_emails).references(:user_emails) }
-  scope :with_user_password, -> { includes(:user_password).references(:user_passwords) }
-  scope :with_user_social_profiles, -> { includes(:user_social_profiles).references(:user_social_profiles) }
-  scope :with_user_role, -> { includes(:user_role).references(:user_roles) }
-  scope :with_user_wallet, -> { includes(:user_wallet).references(:user_wallets) }
-  scope :with_user_address, -> { includes(:user_address).references(:user_addresses) }
+  scope :with_user_emails, -> { includes(:user_emails) }
+  scope :with_user_password, -> { includes(:user_password) }
+  scope :with_user_social_profiles, -> { includes(:user_social_profiles) }
+  scope :with_user_role, -> { includes(:user_role) }
+  scope :with_user_wallet, -> { includes(:user_wallet) }
+  scope :with_user_address, -> { includes(:user_address) }
 end

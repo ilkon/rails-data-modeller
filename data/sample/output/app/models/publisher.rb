@@ -8,6 +8,6 @@ class Publisher < ApplicationRecord
 
   strip_attributes :name
 
-  scope :with_vacancies, -> { includes(:vacancies).references(:vacancies) }
-  scope :with_employers, -> { includes(:employers).references(:employers) }
+  scope :with_vacancies, -> { includes(:vacancies) }
+  scope :with_employers, -> { includes(:employers) }
 end

@@ -133,7 +133,11 @@ module DataModeller
 
         @config[:attributes].each do |attribute, props|
           validations = VALIDATIONS.each_with_object({}) do |prop, hash|
-            hash[prop] = send("#{prop}_validation".to_sym, props[prop]) if props[prop]
+            next unless props[prop]
+
+            next if prop.to_s == 'presence' && props[:type].to_s == 'reference'
+
+            hash[prop] = send("#{prop}_validation".to_sym, props[prop])
           end
 
           next if validations.empty?
@@ -178,9 +182,8 @@ module DataModeller
                                else
                                  raise "Unknown association type: #{type}"
                                end
-            table_name = ActiveSupport::Inflector.tableize(props[:class_name] || association_name)
 
-            add_line("scope :with_#{association_name}, -> { includes(:#{association_name}).references(:#{table_name}) }")
+            add_line("scope :with_#{association_name}, -> { includes(:#{association_name}) }")
           end
         end
 
