@@ -119,7 +119,7 @@ module DataModeller
               config[:attributes][attribute].merge!(
                 original_type: props[:type],
                 type:          'integer',
-                values:
+                values:        values
               )
 
               config[:attributes][attribute][:default] = values[props[:default]] if props[:default].present?
@@ -197,7 +197,7 @@ module DataModeller
           config[:scopes].each do |_scope, props|
             keys = props.keys.sort
             index_name = "\"\#{table_name}_#{keys.join('_')}\"".to_sym
-            config[:indexes][index_name] = { keys: }
+            config[:indexes][index_name] = { keys: keys }
           end
         end
 
